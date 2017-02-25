@@ -26,7 +26,7 @@ public class PlayerShip : Ship
 
 		if (weapons && Input.GetKey(KeyCode.Space))
 		{
-			weapons.Shot();
+			weapons.Shot(this);
 		}
 
 	}

@@ -3,16 +3,21 @@ using System.Collections;
 
 public class Canon : MonoBehaviour
 {
+	public float reloadTime = 3f;
+	public float force = 100;
 
-	// Use this for initialization
-	void Start()
+	internal bool isReady = true;
+
+	public void Shot()
 	{
-
+		isReady = false;
+		StartCoroutine(Shooting());
 	}
 
-	// Update is called once per frame
-	void Update()
+	IEnumerator Shooting()
 	{
-
+		yield return new WaitForSeconds(reloadTime);
+		isReady = true;
 	}
+
 }

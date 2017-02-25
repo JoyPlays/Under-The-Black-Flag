@@ -95,13 +95,13 @@ public class WaterShader : MonoBehaviour
 
 		reflectionCamera.cullingMask = ~(1 << 4) & ReflectLayers.value; //never render water layer
 		reflectionCamera.targetTexture = reflectionTexture;
-		GL.SetRevertBackfacing(true);
+		GL.invertCulling = true;// SetRevertBackfacing(true);
 		reflectionCamera.transform.position = newpos;
 		Vector3 euler = cam.transform.eulerAngles;
 		reflectionCamera.transform.eulerAngles = new Vector3(0, euler.y, euler.z);
 		reflectionCamera.Render();
 		reflectionCamera.transform.position = oldpos;
-		GL.SetRevertBackfacing(false);
+		GL.invertCulling = false;// SetRevertBackfacing(false);
 		foreach (Material mat in materials)
 		{
 			if (mat.HasProperty("_ReflectionTex"))

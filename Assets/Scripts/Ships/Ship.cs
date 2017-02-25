@@ -17,6 +17,12 @@ public class Ship : MonoBehaviour
 	public float amplitude = 1;
 	public float frequency = 1;
 
+	[Header("Params")]
+	public float damage;
+	public DamageManager damageManager;
+
+	protected bool isDed;
+
 	protected virtual void Update()
 	{
 		float angle = Mathf.MoveTowardsAngle(transform.eulerAngles.y, targetAngle, angularSpeed * Time.deltaTime);
@@ -25,5 +31,29 @@ public class Ship : MonoBehaviour
 
 		//Wave
 		transform.position += amplitude * (Mathf.Sin(2 * Mathf.PI * frequency * Time.time) - Mathf.Sin(2 * Mathf.PI * frequency * (Time.time - Time.deltaTime))) * transform.up;
+	}
+
+	public void SetHit(float hitpoint)
+	{
+		if (isDed) return;
+
+		damage += hitpoint;
+		if (damageManager) damageManager.damage = damage;
+		if (damage >= 1) Sunk();
+	}
+
+	public void Sunk()
+	{
+		if (isDed) return;
+		;
+		isDed = true;
+		if (damageManager) damageManager.gameObject.SetActive(false);
+
+		Rigidbody body = GetComponent<Rigidbody>();
+
+		body.constraints = RigidbodyConstraints.None;
+		body.useGravity = true;
+
+		Destroy(gameObject,2.5f);
 	}
 }
