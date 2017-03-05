@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.Events;
 
 public class ShopCannonSlot : MonoBehaviour
 {
@@ -7,6 +8,7 @@ public class ShopCannonSlot : MonoBehaviour
 	public Renderer selectRenderer;
 	public Color selectColor;
 	public GameObject cannonSlot;
+	
 
 	private bool _freeSlot = true;
 	internal bool freeSlot {
@@ -50,5 +52,13 @@ public class ShopCannonSlot : MonoBehaviour
 		CannonShopManager.SelectedCannon = null;
 
 		selectRenderer.material.color = startColor;
+	}
+
+	public void OnSellClick()
+	{
+		if (_freeSlot) return;
+
+		freeSlot = true;
+		Debug.Log("Sell clcicked");
 	}
 }
