@@ -27,7 +27,7 @@ public class Ship : MonoBehaviour
 	{
 		float angle = Mathf.MoveTowardsAngle(transform.eulerAngles.y, targetAngle, angularSpeed * Time.deltaTime);
 		transform.eulerAngles = new Vector3(0, angle, 0);
-		transform.Translate(new Vector3(1, 0, 0) * speed * Time.deltaTime);
+		transform.Translate(new Vector3(0, 0, 1) * speed * Time.deltaTime);
 
 		//Wave
 		transform.position += amplitude * (Mathf.Sin(2 * Mathf.PI * frequency * Time.time) - Mathf.Sin(2 * Mathf.PI * frequency * (Time.time - Time.deltaTime))) * transform.up;
@@ -45,7 +45,7 @@ public class Ship : MonoBehaviour
 	public void Sunk()
 	{
 		if (isDed) return;
-		;
+		
 		isDed = true;
 		if (damageManager) damageManager.gameObject.SetActive(false);
 
