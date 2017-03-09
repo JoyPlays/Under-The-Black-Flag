@@ -4,7 +4,7 @@ using System.Collections;
 public class ShopGoodResource : MonoBehaviour
 {
 
-	public static string SelectedResorce;
+	public static ShopGoodResource SelectedResorce;
 
 	public GameObject selectedObject;
 
@@ -29,6 +29,6 @@ public class ShopGoodResource : MonoBehaviour
 
 	public void OnMouseDown()
 	{
-		SelectedResorce = goodName;
+		SelectedResorce = this;
 	}
 }
