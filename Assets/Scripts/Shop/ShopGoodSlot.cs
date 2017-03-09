@@ -7,6 +7,13 @@ public class ShopGoodSlot : ShopSlot
 	public string goodName;
 	public int goodAmount;
 
+	protected override void Start()
+	{
+		selectRenderer = GetComponent<Renderer>();
+		base.Start();
+		
+	}
+
 	public override bool SlotClick()
 	{
 		if (!base.SlotClick()) return false;

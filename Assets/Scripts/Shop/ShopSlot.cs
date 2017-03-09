@@ -13,14 +13,17 @@ public class ShopSlot : MonoBehaviour
 		get { return _freeSlot; }
 		set {
 			_freeSlot = value;
-			cannonSlot.SetActive(!_freeSlot);
+			if (cannonSlot)
+			{
+				cannonSlot.SetActive(!_freeSlot);
+			}
 		}
 	}
 
 	private Color startColor;
 
 	// Use this for initialization
-	void Start()
+	protected  virtual void Start()
 	{
 		startColor = selectRenderer.material.color;
 		freeSlot = _freeSlot;

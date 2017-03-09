@@ -2,7 +2,12 @@
 
 public enum ShopResources
 {
-	Wood
+	Redwood,
+	Rum,
+	Ale,
+	Bread,
+	Meat,
+
 }
 
 public class Shop : MonoBehaviour
