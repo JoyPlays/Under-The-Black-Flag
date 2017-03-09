@@ -2,63 +2,25 @@
 using System.Collections;
 using UnityEngine.Events;
 
-public class ShopCannonSlot : MonoBehaviour
+public class ShopCannonSlot : ShopSlot
 {
 
-	public Renderer selectRenderer;
-	public Color selectColor;
-	public GameObject cannonSlot;
-	
 
-	private bool _freeSlot = true;
-	internal bool freeSlot {
-		get { return _freeSlot; }
-		set {
-			_freeSlot = value;
-			cannonSlot.SetActive(!_freeSlot);
-		}
-	}
-
-	private Color startColor;
-
-	// Use this for initialization
-	void Start()
-	{
-		startColor = selectRenderer.material.color;
-		freeSlot = _freeSlot;
-	}
-
-	public void OnMouseEnter()
+	protected override void OnMouseEnter()
 	{
 		if (!CannonShopManager.SelectedCannon) return;
-		if (!freeSlot) return;
-
-		selectRenderer.material.color = selectColor;
+		base.OnMouseEnter();
 	}
 
-	public void OnMouseExit()
+	public override bool SlotClick()
 	{
-		selectRenderer.material.color = startColor;
-	}
-
-	public void OnMouseDown()
-	{
-		if (!CannonShopManager.SelectedCannon) return;
-		if (!freeSlot) return;
-
-		freeSlot = false;
+		if (!base.SlotClick()) return false;
+		if (!CannonShopManager.SelectedCannon) return false;
 
 		CannonShopManager.SelectedCannon.gameObject.SetActive(false);
 		CannonShopManager.SelectedCannon = null;
 
-		selectRenderer.material.color = startColor;
+		return true;
 	}
 
-	public void OnSellClick()
-	{
-		if (_freeSlot) return;
-
-		freeSlot = true;
-		Debug.Log("Sell clcicked");
-	}
 }
