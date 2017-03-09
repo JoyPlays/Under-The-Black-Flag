@@ -33,7 +33,7 @@ public class EnemyShip : NavShip
 
 		if (agent.remainingDistance < 0.5f)
 		{
-			StartCoroutine(WaitInPort());
+			//StartCoroutine(WaitInPort());
 		}
 
 		base.Update();
