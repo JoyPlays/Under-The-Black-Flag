@@ -1,0 +1,208 @@
+fileFormatVersion: 2
+guid: e19cea7fd94e14741811809890a2dea6
+timeCreated: 1488912175
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Masti
+    100002: MastuPlatformas
+    100004: mastuVirves
+    100006: mastuVirves_MeshPart0
+    100008: mastuVirves_MeshPart1
+    100010: PurnaMasts
+    100012: SailsHighPoly
+    100014: SailsHighPoly_MeshPart0
+    100016: SailsHighPoly_MeshPart1
+    100018: SailsHighPoly_MeshPart10
+    100020: SailsHighPoly_MeshPart11
+    100022: SailsHighPoly_MeshPart12
+    100024: SailsHighPoly_MeshPart13
+    100026: SailsHighPoly_MeshPart14
+    100028: SailsHighPoly_MeshPart2
+    100030: SailsHighPoly_MeshPart3
+    100032: SailsHighPoly_MeshPart4
+    100034: SailsHighPoly_MeshPart5
+    100036: SailsHighPoly_MeshPart6
+    100038: SailsHighPoly_MeshPart7
+    100040: SailsHighPoly_MeshPart8
+    100042: SailsHighPoly_MeshPart9
+    100044: SailsLowPoly
+    100046: SailTopWood
+    100048: Ship
+    100050: Ship Wheel
+    100052: //RootNode
+    100054: SturesBalsts
+    400000: Masti
+    400002: MastuPlatformas
+    400004: mastuVirves
+    400006: mastuVirves_MeshPart0
+    400008: mastuVirves_MeshPart1
+    400010: PurnaMasts
+    400012: SailsHighPoly
+    400014: SailsHighPoly_MeshPart0
+    400016: SailsHighPoly_MeshPart1
+    400018: SailsHighPoly_MeshPart10
+    400020: SailsHighPoly_MeshPart11
+    400022: SailsHighPoly_MeshPart12
+    400024: SailsHighPoly_MeshPart13
+    400026: SailsHighPoly_MeshPart14
+    400028: SailsHighPoly_MeshPart2
+    400030: SailsHighPoly_MeshPart3
+    400032: SailsHighPoly_MeshPart4
+    400034: SailsHighPoly_MeshPart5
+    400036: SailsHighPoly_MeshPart6
+    400038: SailsHighPoly_MeshPart7
+    400040: SailsHighPoly_MeshPart8
+    400042: SailsHighPoly_MeshPart9
+    400044: SailsLowPoly
+    400046: SailTopWood
+    400048: Ship
+    400050: Ship Wheel
+    400052: //RootNode
+    400054: SturesBalsts
+    2300000: Masti
+    2300002: MastuPlatformas
+    2300004: mastuVirves_MeshPart0
+    2300006: mastuVirves_MeshPart1
+    2300008: PurnaMasts
+    2300010: SailsHighPoly_MeshPart0
+    2300012: SailsHighPoly_MeshPart1
+    2300014: SailsHighPoly_MeshPart10
+    2300016: SailsHighPoly_MeshPart11
+    2300018: SailsHighPoly_MeshPart12
+    2300020: SailsHighPoly_MeshPart13
+    2300022: SailsHighPoly_MeshPart14
+    2300024: SailsHighPoly_MeshPart2
+    2300026: SailsHighPoly_MeshPart3
+    2300028: SailsHighPoly_MeshPart4
+    2300030: SailsHighPoly_MeshPart5
+    2300032: SailsHighPoly_MeshPart6
+    2300034: SailsHighPoly_MeshPart7
+    2300036: SailsHighPoly_MeshPart8
+    2300038: SailsHighPoly_MeshPart9
+    2300040: SailsLowPoly
+    2300042: SailTopWood
+    2300044: Ship
+    2300046: Ship Wheel
+    2300048: SturesBalsts
+    3300000: Masti
+    3300002: MastuPlatformas
+    3300004: mastuVirves_MeshPart0
+    3300006: mastuVirves_MeshPart1
+    3300008: PurnaMasts
+    3300010: SailsHighPoly_MeshPart0
+    3300012: SailsHighPoly_MeshPart1
+    3300014: SailsHighPoly_MeshPart10
+    3300016: SailsHighPoly_MeshPart11
+    3300018: SailsHighPoly_MeshPart12
+    3300020: SailsHighPoly_MeshPart13
+    3300022: SailsHighPoly_MeshPart14
+    3300024: SailsHighPoly_MeshPart2
+    3300026: SailsHighPoly_MeshPart3
+    3300028: SailsHighPoly_MeshPart4
+    3300030: SailsHighPoly_MeshPart5
+    3300032: SailsHighPoly_MeshPart6
+    3300034: SailsHighPoly_MeshPart7
+    3300036: SailsHighPoly_MeshPart8
+    3300038: SailsHighPoly_MeshPart9
+    3300040: SailsLowPoly
+    3300042: SailTopWood
+    3300044: Ship
+    3300046: Ship Wheel
+    3300048: SturesBalsts
+    4300000: SailsHighPoly_MeshPart0
+    4300002: SailsHighPoly_MeshPart1
+    4300004: SailsHighPoly_MeshPart2
+    4300006: SailsHighPoly_MeshPart3
+    4300008: SailsHighPoly_MeshPart4
+    4300010: SailsHighPoly_MeshPart5
+    4300012: SailsHighPoly_MeshPart6
+    4300014: SailsHighPoly_MeshPart7
+    4300016: SailsHighPoly_MeshPart8
+    4300018: SailsHighPoly_MeshPart9
+    4300020: SailsHighPoly_MeshPart10
+    4300022: SailsHighPoly_MeshPart11
+    4300024: SailsHighPoly_MeshPart12
+    4300026: SailsHighPoly_MeshPart13
+    4300028: SailsHighPoly_MeshPart14
+    4300030: Ship Wheel
+    4300032: SturesBalsts
+    4300034: PurnaMasts
+    4300036: mastuVirves_MeshPart0
+    4300038: mastuVirves_MeshPart1
+    4300040: MastuPlatformas
+    4300042: Masti
+    4300044: SailsLowPoly
+    4300046: SailTopWood
+    4300048: Ship
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
