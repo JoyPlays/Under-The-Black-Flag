@@ -8,11 +8,9 @@ public class ShopGoodResource : MonoBehaviour
 
 	public GameObject selectedObject;
 
-	public EntityEconomy economy;
-	public string goodName;
+	public ShopResources goodName;
 
 	private bool _selected;
-
 	public bool selected {
 		get { return _selected; }
 		set {

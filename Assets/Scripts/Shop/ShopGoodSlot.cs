@@ -17,11 +17,11 @@ public class ShopGoodSlot : ShopSlot
 	public override bool SlotClick()
 	{
 		if (!base.SlotClick()) return false;
-		if (!ShopGoodResource.SelectedResorce || string.IsNullOrEmpty(ShopGoodResource.SelectedResorce.goodName)) return false;
+		if (!ShopGoodResource.SelectedResorce) return false;
 
 		Debug.Log("On good slot click: " + ShopGoodResource.SelectedResorce.goodName);
 
-		goodName = ShopGoodResource.SelectedResorce.goodName;
+		goodName = ShopGoodResource.SelectedResorce.goodName.ToString();
 		goodAmount++;
 
 		ShopGoodResource.SelectedResorce.selected = false;
