@@ -16,9 +16,6 @@ public class NavShip : Ship
 	[Header("Sunk")]
 	public float sunkSpeed = 2f;
 
-	[Header("Params")]
-	public float damage;
-	public DamageManager damageManager;
 
 	protected NavMeshAgent agent;
 
@@ -42,19 +39,13 @@ public class NavShip : Ship
 		}
 	}
 
-	public void SetHit(float hitpoint)
+	
+
+	public override void Sunk()
 	{
+		base.Sunk();
+
 		if (!agent || !agent.enabled) return;
-
-		damage += hitpoint;
-		if (damageManager) damageManager.damage = damage;
-		if (damage >= 1) Sunk();
-	}
-
-	public void Sunk()
-	{
-		if (!agent || !agent.enabled) return;
-
 		StartCoroutine(SunkShip());
 	}
 
