@@ -23,6 +23,18 @@ public class ResourceListEditor : Editor
 
         GetTarget.Update();
 
+        SerializedProperty field = GetTarget.FindProperty("SimulateIntervals");
+
+        if(field != null) {
+            EditorGUILayout.PropertyField(field);
+        }
+
+        SerializedProperty field2 = GetTarget.FindProperty("Interval");
+
+        if(field2 != null) {
+            EditorGUILayout.PropertyField(field2);
+        }
+
         if(GUILayout.Button("AddItem")) {
             Resource res = new Resource();
             res.Name = "New Resource";
