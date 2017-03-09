@@ -45,7 +45,7 @@ public class EntityEconomy : MonoBehaviour {
 			}
 	}
 
-	public Dictionary<string, int> GetResourceSellPrices() {
+	public Dictionary<string, int> GetResourceSellPrices() { //player buys from entity
 		EntityRequirments req = GetComponent<EntityRequirments>();
 		Dictionary<string, int> response = new Dictionary<string, int>();
 
@@ -89,7 +89,7 @@ public class EntityEconomy : MonoBehaviour {
 		return response;
 	}
 
-	public Dictionary<string, int> GetResourceBuyPrices() {
+	public Dictionary<string, int> GetResourceBuyPrices() { //Player sels to Entity
 		EntityRequirments req = GetComponent<EntityRequirments>();
 		Dictionary<string, int> response = new Dictionary<string, int>();
 
@@ -141,12 +141,46 @@ public class EntityEconomy : MonoBehaviour {
 		return response;
 	}
 
-	public void BuyResource(string name, int value) {
+    public bool BuyResource(string name, int price_per_one, int value)
+    {
+        if(Money < price_per_one * value)
+        {
+            return false;
+        }
+        foreach (Resource res in Resources)
+        {
+            if (res.Name == name)
+            {
+                res.Ammount += value;
+                Money -= value * price_per_one;
+                return true;
+            }
+        }
 
-	}
+        Resource r = new Resource();
+        r.Name = name;
+        r.Ammount = value;
+        Money -= value * price_per_one;
 
-	public void SellResource(string name, int value) {
+        Resources.Add(r);
+        return true;
 
+    }
+
+	public bool SellResource(string name, int price_per_one, int value) {
+        foreach(Resource res in Resources) {
+            if(res.Name == name)
+            {
+                if(res.Ammount < value)
+                {
+                    return false;
+                }
+                res.Ammount -= value;
+                Money += value * price_per_one;
+                return true;
+            }
+        }
+        return false;
 	}
 
 }
