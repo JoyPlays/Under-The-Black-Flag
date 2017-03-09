@@ -7,4 +7,6 @@ public class Resource {
 
     public int BasePrice;
 
+		public int CurrentPrice;
+
 }

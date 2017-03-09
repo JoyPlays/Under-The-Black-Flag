@@ -20,7 +20,7 @@ public class EntityEconomy : MonoBehaviour {
 	public void AddResource(string name, int value) {
 		Debug.Log("Adding resource: " + name + " value: " + value);
 		foreach(Resource res in Resources) {
-			if(res.Name == name) {
+			if(res.Name.ToString() == name) {
 				res.Ammount += value;
 				return;
 			}
@@ -45,7 +45,20 @@ public class EntityEconomy : MonoBehaviour {
 			}
 	}
 
-    public Dictionary<string, int> GetResourceAmount()
+	public int GetResourceAmount(string resource)
+	{
+		var economy = GetResourceAmount();
+		if (economy != null && economy.ContainsKey(resource))
+		{
+			return economy[resource];
+		}
+
+		return 0;
+
+	}
+
+
+	public Dictionary<string, int> GetResourceAmount()
     {
         Dictionary<string, int> response = new Dictionary<string, int>();
         foreach(Resource res in Resources)
@@ -57,6 +70,17 @@ public class EntityEconomy : MonoBehaviour {
         }
         return response;
     }
+
+	public int GetResourceSellPrices(string resource)
+	{
+		var economy = GetResourceSellPrices();
+		if (economy != null && economy.ContainsKey(resource))
+		{
+			return economy[resource];
+		}
+
+		return 0;
+	}
 
 	public Dictionary<string, int> GetResourceSellPrices() { //player buys from entity
 		EntityRequirments req = GetComponent<EntityRequirments>();
@@ -102,6 +126,17 @@ public class EntityEconomy : MonoBehaviour {
 		return response;
 	}
 
+	public int GetResourceBuyPrices(string resource)
+	{
+		var economy = GetResourceBuyPrices();
+		if (economy != null && economy.ContainsKey(resource))
+		{
+			return economy[resource];
+		}
+
+		return 0;
+	}
+
 	public Dictionary<string, int> GetResourceBuyPrices() { //Player sels to Entity
 		EntityRequirments req = GetComponent<EntityRequirments>();
 		Dictionary<string, int> response = new Dictionary<string, int>();
@@ -128,6 +163,7 @@ public class EntityEconomy : MonoBehaviour {
 
 
 		foreach(Resource res in Resources) {
+			Debug.Log(res.Name);
 			int ammount = res.Ammount;
 			int diffenrece = cycle_difference[res.Name];
 			int base_price = response[res.Name];

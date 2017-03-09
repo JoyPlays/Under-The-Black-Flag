@@ -22,11 +22,27 @@ public class ShopGoodSlot : ShopSlot
 		Debug.Log("On good slot click: " + ShopGoodResource.SelectedResorce.goodName);
 
 		goodName = ShopGoodResource.SelectedResorce.goodName.ToString();
+		ShopGoodUI.Instance.SetResource(goodName, this);
+
+		/*
+		goodName = ShopGoodResource.SelectedResorce.goodName.ToString();
 		goodAmount++;
 
 		ShopGoodResource.SelectedResorce.selected = false;
 		ShopGoodResource.SelectedResorce = null;
-
+		*/
 		return true;
+	}
+
+
+	public void BuyResource(string name, int amount)
+	{
+		goodName = name;
+		goodAmount = amount;
+
+		ShopGoodResource.SelectedResorce.selected = false;
+		ShopGoodResource.SelectedResorce = null;
+
+		Unselect();
 	}
 }

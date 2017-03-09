@@ -40,6 +40,10 @@ public class ShopSlot : MonoBehaviour
 	{
 		selectRenderer.material.color = startColor;
 	}
+	protected void Unselect()
+	{
+		selectRenderer.material.color = startColor;
+	}
 
 	protected virtual void OnMouseDown()
 	{

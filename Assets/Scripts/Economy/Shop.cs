@@ -25,6 +25,7 @@ public class Shop : MonoBehaviour
 
 	void Update()
 	{
+		if (!economy) return;
 		var resources = economy.GetResourceAmount();
 		foreach(Transform trans in objects)
 		{

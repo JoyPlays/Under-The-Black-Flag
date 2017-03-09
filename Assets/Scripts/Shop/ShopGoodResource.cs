@@ -23,6 +23,7 @@ public class ShopGoodResource : MonoBehaviour
 	void Start()
 	{
 		selectedObject.SetActive(false);
+
 	}
 
 	public void OnMouseDown()
