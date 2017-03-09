@@ -45,6 +45,19 @@ public class EntityEconomy : MonoBehaviour {
 			}
 	}
 
+    public Dictionary<string, int> GetResourceAmount()
+    {
+        Dictionary<string, int> response = new Dictionary<string, int>();
+        foreach(Resource res in Resources)
+        {
+            if(res.Ammount > 0)
+            {
+                response.Add(res.Name, res.Ammount);
+            }
+        }
+        return response;
+    }
+
 	public Dictionary<string, int> GetResourceSellPrices() { //player buys from entity
 		EntityRequirments req = GetComponent<EntityRequirments>();
 		Dictionary<string, int> response = new Dictionary<string, int>();
