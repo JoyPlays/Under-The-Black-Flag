@@ -24,6 +24,7 @@ public class Bullet : MonoBehaviour
 	void IgnoreColliders(bool ignore)
 	{
 		if (!selfCollider) return;
+		if (ignoredColliders == null) return;
 		foreach (Collider collider1 in ignoredColliders)
 		{
 			Physics.IgnoreCollision(selfCollider, collider1, ignore);
@@ -34,8 +35,11 @@ public class Bullet : MonoBehaviour
 	{
 		gameObject.SetActive(true);
 
-		ignoredColliders = ignoreShip.GetComponentsInChildren<Collider>();
-		IgnoreColliders(true);
+		if (ignoreShip)
+		{
+			ignoredColliders = ignoreShip.GetComponentsInChildren<Collider>();
+			IgnoreColliders(true);
+		}
 
 		transform.position = canon.transform.position;
 		transform.rotation = canon.transform.rotation;
@@ -78,6 +82,7 @@ public class Bullet : MonoBehaviour
 
 	public void OnCollisionEnter(Collision collision)
 	{
+		/*
 		if (isCollision) return;
 
 		Ship ship = collision.gameObject.GetComponentInParent<Ship>();
@@ -91,5 +96,6 @@ public class Bullet : MonoBehaviour
 		if (effect) effect.SetActive(true);
 
 		isCollision = true;
+		*/
 	}
 }

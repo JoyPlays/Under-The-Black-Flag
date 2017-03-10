@@ -20,4 +20,6 @@ public class Canon : MonoBehaviour
 		isReady = true;
 	}
 
+
+
 }

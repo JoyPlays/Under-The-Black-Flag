@@ -1,20 +1,29 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.AI;
 
 public class PlayerShip : NavShip
 {
 	[Header("Player")]
-	public float targetAngle = 0;
-
+	[Range(0, 20)]
 	public float maxSpeed = 10;
+	[Range(0, 1)]
 	public float throtle = 0.1f;
+	[Range(0, 10)]
 	public float angularThrotle = 1f;
-
 	[Range(0, 50)]
 	public float angularSpeed;
 
+	[Header("Cannons")]
+	public List<Canon> rightCannons;
+	public List<Canon> leftCannons;
+
+	[Header("Test values")]
 	[Range(0, 10)]
 	public float speed;
+	public float targetAngle = 0;
+
+
 
 	public WeaponManager weapons;
 
@@ -49,7 +58,4 @@ public class PlayerShip : NavShip
 		}
 	}
 
-	public void OnCollisionStay(Collision collision)
-	{
-	}
 }

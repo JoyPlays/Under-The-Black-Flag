@@ -55,12 +55,12 @@ public class EnemyShip : NavShip
 		yield return new WaitForSeconds(10);
 
 		currentTarget++;
-		if (currentTarget > destinations.Count)
+		if (currentTarget >= destinations.Count)
 		{
 			currentTarget = 0;
 		}
 
-		if (destinations.Count > 0)
+		if (destinations.Count < currentTarget)
 		{
 			target = destinations[currentTarget];
 		}
