@@ -43,6 +43,7 @@ public class GameUI : MonoBehaviour
 
         // Updating hitpoint UI
         SetDeadUI();
+        SetReloadUI();
     }
 
     public void SetDeadUI()
@@ -54,5 +55,33 @@ public class GameUI : MonoBehaviour
         Color c = lowHitpoints.color;
         c.a = Mathf.Abs(hpLeft);
         lowHitpoints.color = c;
+    }
+
+    public void SetReloadUI()
+    {
+        if (!Player.gunsLoadedLeft)
+        {
+            Color c = leftNotReady.color;
+            c.a = 255f;
+            leftNotReady.color = c;
+        }
+        else
+        {
+            Color c = leftNotReady.color;
+            c.a = 0f;
+            leftNotReady.color = c;
+        }
+        if (!Player.gunsLoadedRight)
+        {
+            Color c = rightNotReady.color;
+            c.a = 255f;
+            rightNotReady.color = c;
+        }
+        else
+        {
+            Color c = rightNotReady.color;
+            c.a = 0f;
+            leftNotReady.color = c;
+        }
     }
 }

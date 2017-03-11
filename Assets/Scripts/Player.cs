@@ -10,6 +10,9 @@ public static class Player {
     public static int gunPowderCount;
     public static int cannonBallCount;
 
+    public static bool gunsLoadedLeft;
+    public static bool gunsLoadedRight;
+
     public static float shipSpeed;
 
     // Crew variables
