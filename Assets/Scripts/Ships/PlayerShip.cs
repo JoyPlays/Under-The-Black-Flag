@@ -4,6 +4,10 @@ using UnityEngine.AI;
 
 public class PlayerShip : NavShip
 {
+    [Header("Ship stats")]
+    [Range(0, 1000)]
+    public float overallHitpoints = 1000; 
+
 	[Header("Player")]
 	[Range(0, 20)]
 	public float maxSpeed = 10;
@@ -32,7 +36,9 @@ public class PlayerShip : NavShip
 	void Awake()
 	{
 		targetAngle = 90;
-	}
+        Player.hullHitpoints = overallHitpoints;
+
+    }
 
 	protected override void Update()
 	{
@@ -41,6 +47,8 @@ public class PlayerShip : NavShip
 		//Keyboard speed
 		speed += Input.GetKey(KeyCode.W) ? throtle : Input.GetKey(KeyCode.S) ? -throtle : 0;
 		speed = Mathf.Clamp(speed, 0, maxSpeed);
+
+        Player.shipSpeed = speed;
 
 		//Keyboard rotate
 		targetAngle += Input.GetKey(KeyCode.D) ? angularThrotle : Input.GetKey(KeyCode.A) ? -angularThrotle : 0;
@@ -56,6 +64,9 @@ public class PlayerShip : NavShip
 		{
 			//weapons.Shot(this);
 		}
-	}
+
+        // Set static Player hitpoints
+        Player.hullHitpoints = overallHitpoints;
+    }
 
 }
