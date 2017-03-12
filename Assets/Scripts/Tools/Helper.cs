@@ -40,12 +40,18 @@ public static class Helper
 	public static float AngleInDeg(Vector3 vec1, Vector3 vec2, float delta = 0)
 	{
 		float angle = AngleInRad(vec1, vec2) * 180f / Mathf.PI + delta;
-		
-		int an = Mathf.FloorToInt(Mathf.Abs(angle) / 360f)*360;
-		if (angle < 0) angle = an + 360 + angle;
-		if (angle > 360) angle = an - angle;
+		return ClampAngle(angle);
+	}
 
-		return angle;
+	public static float ClampAngle(float angle)
+	{
+		float a = angle;
+
+		int an = Mathf.FloorToInt(Mathf.Abs(angle) / 360f) * 360;
+		if (angle < 0) a = an + 360 + angle;
+		if (angle > 360) a = an - angle;
+
+		return a;
 	}
 
 	public static bool GetMouseOnGround(Collider ground, out Vector3 position, float grid = 0)

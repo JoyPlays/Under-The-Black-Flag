@@ -76,7 +76,7 @@ public class PlayerShip : NavShip
 		if (agent && agent.enabled)
 		{
 			//Set move on nav mesh
-			//agent.velocity = new Vector3(Mathf.Sin(angle), 0, Mathf.Cos(angle)) * speed;
+			agent.velocity = new Vector3(Mathf.Sin(angle), 0, Mathf.Cos(angle)) * speed;
 		}
 
 		if (weapons && Input.GetMouseButtonDown(0))
@@ -84,9 +84,7 @@ public class PlayerShip : NavShip
 		{
 
 			RaycastHit hit = new RaycastHit();
-			if (
-					!Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition).origin,
-													 Camera.main.ScreenPointToRay(Input.mousePosition).direction, out hit, Mathf.Infinity, LayerMask.GetMask("Water")))
+			if (!Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition).origin,Camera.main.ScreenPointToRay(Input.mousePosition).direction, out hit, Mathf.Infinity, LayerMask.GetMask("Water")))
 			{
 				return;
 			}

@@ -1,17 +1,19 @@
-﻿
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyShip : NavShip
 {
-
+	[Header("NPC destinations")]
+	public bool randomDestination;
+	[Tooltip("secconds for waiting in target")]
+	public float waitInPort = 10;
 	public List<Transform> destinations;
 
 	int currentTarget;
 
-	public bool inPort;
-	
+	internal bool inPort;
+
 	protected override void Start()
 	{
 		base.Start();
@@ -33,8 +35,12 @@ public class EnemyShip : NavShip
 
 		if (PlayerShip.Distance(transform.position) < 15)
 		{
-			//Debug.Log("dist:" +  PlayerShip.Distance(transform.position) + " angle:" + PlayerShip.Angle(transform.position));
-			weapons.Shot(PlayerShip.Angle(transform.position,-90));
+			float a = Helper.ClampAngle(transform.eulerAngles.y);
+			if (a > 75 && a < 115 || a > 235 && a < 315)
+			{
+				//Debug.Log("a:" + a + " angle:" + PlayerShip.Angle(transform.position,-a));
+				weapons.Shot(PlayerShip.Angle(transform.position, -a));
+			}
 		}
 
 
@@ -59,13 +65,25 @@ public class EnemyShip : NavShip
 
 		target = null;
 
-		yield return new WaitForSeconds(10);
+		yield return new WaitForSeconds(waitInPort);
 
-		currentTarget++;
-		if (currentTarget >= destinations.Count)
+		if (randomDestination && destinations.Count > 1)
 		{
-			currentTarget = 0;
+			int d = Random.Range(0, destinations.Count);
+			while (d == currentTarget)
+			{
+				d = Random.Range(0, destinations.Count);
+			}
 		}
+		else
+		{
+			currentTarget++;
+			if (currentTarget >= destinations.Count)
+			{
+				currentTarget = 0;
+			}
+		}
+
 
 		if (destinations.Count < currentTarget)
 		{
