@@ -13,6 +13,8 @@ public class Canon : MonoBehaviour
 
 	public CannonBort bort;
 
+	public AudioClip cannonSound;
+
 	[Header("Random values (0-100%)")]
 
 	[Tooltip("Reaload time increase random")]
@@ -47,9 +49,6 @@ public class Canon : MonoBehaviour
 	public void Shot()
 	{
 		if (!isReady) return;
-
-		
-
 		isReady = false;
 		StartCoroutine(Shooting());
 	}
@@ -57,7 +56,7 @@ public class Canon : MonoBehaviour
 	IEnumerator Shooting()
 	{
 		BulletManager.Shot(this);
-
+		AudioSource.PlayClipAtPoint(cannonSound, transform.position);
 		yield return new WaitForSeconds(reloadTime * (1 + Random.value * (reloadTimeIncrease / 100f)));
 
 		isReady = true;

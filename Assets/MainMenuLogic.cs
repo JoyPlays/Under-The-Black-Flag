@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MainMenuLogic : MonoBehaviour {
-
-	
+public class MainMenuLogic : MonoBehaviour
+{
+	public AudioManager audioManager;
 	// Update is called once per frame
 
 	public void StartGame()
 	{
+		audioManager.StopMusic();
 		SceneManager.LoadScene("WorldMap");
 	}
 

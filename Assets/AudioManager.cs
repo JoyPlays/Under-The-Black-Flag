@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class AudioManager : MonoBehaviour
 {
@@ -13,13 +14,9 @@ public class AudioManager : MonoBehaviour
 		DontDestroyOnLoad(transform.gameObject);
 	}
 
-	// Use this for initialization
-	void Start ()
+	public void StopMusic()
 	{
+			ambientShore.Stop();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
 }
