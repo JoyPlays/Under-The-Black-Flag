@@ -4,13 +4,15 @@ using NUnit.Framework;
 
 public class Bullet : MonoBehaviour
 {
+	public float hitpoint = 0.1f;
 	public GameObject effect;
+	public GameObject visuals;
 
 	internal bool isReady = true;
 
 	private Rigidbody body;
 	private bool isCollision;
-	private float bulletTime = 3f;
+	private float bulletTime = 2f;
 
 	private Collider[] ignoredColliders;
 	private Collider selfCollider;
@@ -19,6 +21,7 @@ public class Bullet : MonoBehaviour
 	{
 		body = GetComponent<Rigidbody>();
 		selfCollider = GetComponentInChildren<Collider>();
+		
 	}
 
 	void IgnoreColliders(bool ignore)
@@ -33,6 +36,8 @@ public class Bullet : MonoBehaviour
 
 	public void Shot(Canon canon)
 	{
+		if (!isReady) return;
+
 		gameObject.SetActive(true);
 
 		if (canon.ship)
@@ -43,6 +48,7 @@ public class Bullet : MonoBehaviour
 
 		transform.position = canon.transform.position;
 		transform.rotation = canon.transform.rotation;
+		visuals.SetActive(true);
 
 		body.AddForce(canon.shotForce);
 
@@ -54,17 +60,20 @@ public class Bullet : MonoBehaviour
 		isReady = false;
 		isCollision = false;
 
-		float t = bulletTime;
-		while (t > 0)
+		float t = 0;
+		while (t < bulletTime)
 		{
-			t -= Time.deltaTime;
-
+			t += Time.deltaTime;
+			yield return null;
 			if (isCollision)
 			{
-				yield return new WaitForSeconds(4);
+				break;
 			}
+		}
 
-		yield return null;
+		if (isCollision)
+		{
+			yield return new WaitForSeconds(2);
 		}
 
 		IgnoreColliders(false);
@@ -75,27 +84,34 @@ public class Bullet : MonoBehaviour
 		transform.localPosition = Vector3.zero;
 		transform.localEulerAngles = Vector3.zero;
 
+		isReady = true;
+
 		if (effect) effect.SetActive(false);
 		gameObject.SetActive(false);
-		isReady = true;
 	}
 
 	public void OnCollisionEnter(Collision collision)
 	{
-		/*
+		
 		if (isCollision) return;
 
 		Ship ship = collision.gameObject.GetComponentInParent<Ship>();
-		if (ship)
+		if (!ship)
 		{
-			ship.SetHit(0.1f);
+			return;
 		}
+
+		//Debug.Log("Damage ship");
+		ship.SetHit(hitpoint);
 
 		body.velocity = Vector3.zero;
 		body.angularVelocity = Vector3.zero;
+
+		visuals.SetActive(false);
+
 		if (effect) effect.SetActive(true);
 
 		isCollision = true;
-		*/
+		
 	}
 }

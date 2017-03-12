@@ -10,6 +10,21 @@ public class EnemyShip : NavShip
 	public float waitInPort = 10;
 	public List<Transform> destinations;
 
+	[Header("Shoting")]
+	public float shotDistance = 20;
+	public float shotAngle = 25;
+
+
+	public float playerAngle;
+	public float deltaAngle;
+
+	public float a1;
+	public float a2;
+	public float a3;
+
+	public float angle;
+	[Range(0, 50)]
+	public float angularSpeed;
 	int currentTarget;
 
 	internal bool inPort;
@@ -20,7 +35,7 @@ public class EnemyShip : NavShip
 
 		if (destinations.Count > 0)
 		{
-			target = destinations[0];
+			//target = destinations[0];
 		}
 	}
 
@@ -32,37 +47,68 @@ public class EnemyShip : NavShip
 			base.Update();
 			return;
 		}
-
-		if (PlayerShip.Distance(transform.position) < 15)
+		float playerDist = PlayerShip.Distance(transform.position);
+		if (playerDist < shotDistance)
 		{
-			float a = Helper.ClampAngle(transform.eulerAngles.y);
-			if (a > 75 && a < 115 || a > 235 && a < 315)
+			angle = Helper.ClampAngle(transform.eulerAngles.y);
+			playerAngle = PlayerShip.Angle(transform.position,90);
+			deltaAngle = Helper.ClampAngle(playerAngle - angle);
+			if (deltaAngle >= 0 && deltaAngle <= 25 || deltaAngle >= 335)
 			{
 				//Debug.Log("a:" + a + " angle:" + PlayerShip.Angle(transform.position,-a));
-				weapons.Shot(PlayerShip.Angle(transform.position, -a));
+				weapons.Shot(PlayerShip.Angle(transform.position, -angle));
 			}
+			//else
+			{
+				a1 = Mathf.Abs(Helper.CalcShortestRot(angle, playerAngle));
+				a2 = Mathf.Abs(Helper.CalcShortestRot(angle, playerAngle - 180f));
+
+				a3 = a1 < a2 ? playerAngle : playerAngle - 180;
+
+				angle = Mathf.MoveTowardsAngle(angle, a3, angularSpeed*Time.deltaTime);
+
+
+				transform.eulerAngles = new Vector3(0, angle, 0);
+			}
+			if (playerDist > shotDistance*0.5f)
+			{
+				target = PlayerShip.Instance.transform;
+			}
+			else
+			{
+				target = null;
+				agent.velocity = Vector3.zero;
+			}
+
+
+		}
+		else if (playerDist > shotDistance*2)
+		{
+			target = destinations[currentTarget];
 		}
 
 
-		if (target && agent.remainingDistance < 0.5f)
+		if (target && Vector3.Distance(transform.position, target.position) < 0.5f)
 		{
 			StartCoroutine(WaitInPort());
 		}
 
 		base.Update();
-
 	}
 
 	IEnumerator WaitInPort()
 	{
-		inPort = true;
 
 		City city = target.GetComponent<City>();
-		if (city)
+		if (!city)
 		{
-			city.TradingWithShip(this);
+			yield break;
 		}
 
+		Debug.Log("Wait in port");
+
+		inPort = true;
+		city.TradingWithShip(this);
 		target = null;
 
 		yield return new WaitForSeconds(waitInPort);
