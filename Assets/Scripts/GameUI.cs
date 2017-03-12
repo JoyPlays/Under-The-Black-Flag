@@ -30,6 +30,10 @@ public class GameUI : MonoBehaviour
 	public GameObject shop;
 	public Animator shopAnimator;
 
+	[Header("Esc button")]
+	public GameObject quitToMenu;
+	private bool quitMenuOpened;
+
     float tempSpeed;
     float maxHitpoints;
 
@@ -58,6 +62,10 @@ public class GameUI : MonoBehaviour
 		{
 			OpenMap();
 		}
+		if (Input.GetKeyDown(KeyCode.Escape))
+		{
+			ReturnToMainMenu();
+		}
 		
 	}
 
@@ -85,6 +93,20 @@ public class GameUI : MonoBehaviour
         c.a = Mathf.Abs(hpLeft);
         lowHitpoints.color = c;
     }
+
+	public void ReturnToMainMenu()
+	{
+		if (!quitMenuOpened)
+		{
+			quitToMenu.SetActive(true);
+			quitMenuOpened = true;
+		}
+		else
+		{
+			quitToMenu.SetActive(false);
+			quitMenuOpened = false;
+		}
+	}
 
     public void SetReloadUI()
     {

@@ -13,6 +13,11 @@ public class MainMenuLogic : MonoBehaviour {
 		SceneManager.LoadScene("WorldMap");
 	}
 
+	public void ReturnToMainMenu()
+	{
+		SceneManager.LoadScene("MainMenu");
+	}
+
 	public void QuitGame()
 	{
 		Application.Quit();
