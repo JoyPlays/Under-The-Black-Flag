@@ -103,6 +103,7 @@ public class PlayerShip : NavShip
 		if (other.GetComponent<City>())
 		{
 			dockPort = other.GetComponent<City>();
+			Player.enteredCity = dockPort.caption;
 			Debug.Log("Enter in city:" + dockPort.caption);
 		}
 	}
@@ -113,6 +114,7 @@ public class PlayerShip : NavShip
 		{
 			Debug.Log("Exit from city:" + dockPort.caption);
 			dockPort = null;
+			Player.enteredCity = "";
 		}
 
 	}

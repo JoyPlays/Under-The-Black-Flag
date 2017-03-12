@@ -9,12 +9,18 @@ public static class Player {
     public static float sailHitpoints;
     public static int gunPowderCount;
     public static int cannonBallCount;
+	public static float shipSpeed;
 
-    public static bool gunsLoadedLeft;
+
+	// All about guns
+	public static bool gunsLoadedLeft;
     public static bool gunsLoadedRight;
+	public static bool leftShot;
+	public static bool rightShot;
 
-    public static float shipSpeed;
-
+	// City variables
+	public static string enteredCity;
+    
     // Crew variables
     public static int crewCount;
     public static float crewHitpoints;

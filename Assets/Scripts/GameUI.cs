@@ -22,6 +22,10 @@ public class GameUI : MonoBehaviour
     public Image rightReady;
     public Image rightNotReady;
 
+	[Header("Game Map")]
+	public GameObject map;
+	private bool mapOpen = false;
+
 	[Header("Shop functionality")]
 	public GameObject shop;
 	public Animator shopAnimator;
@@ -35,20 +39,43 @@ public class GameUI : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        // Updating UI speed text 
-        tempSpeed = Mathf.Round(Player.shipSpeed * 100.0f) / 100.0f;
-        shipSpeed.text = tempSpeed.ToString() + " m/s";
+	void Update()
+	{
+		// Updating UI speed text 
+		tempSpeed = Mathf.Round(Player.shipSpeed * 100.0f) / 100.0f;
+		shipSpeed.text = tempSpeed.ToString() + " m/s";
 
-        // Updating UI cannonammount & gunpowder text 
-        cannonBallCount.text = Player.cannonBallCount.ToString();
-        gunPowderCount.text = Player.gunPowderCount.ToString();
+		// Updating UI cannonammount & gunpowder text 
+		cannonBallCount.text = Player.cannonBallCount.ToString();
+		gunPowderCount.text = Player.gunPowderCount.ToString();
 
-        // Updating hitpoint UI
-        SetDeadUI();
-        SetReloadUI();
-    }
+		// Updating hitpoint UI
+		SetDeadUI();
+		SetReloadUI();
+
+		// Open Game Map
+		if (Input.GetKeyDown(KeyCode.M))
+		{
+			OpenMap();
+		}
+		
+	}
+
+	public void OpenMap()
+	{
+		if (!mapOpen)
+		{
+			Debug.Log("Opening Map");
+			map.SetActive(true);
+			mapOpen = true;
+		}
+		else
+		{ 
+			Debug.Log("Closing Map");
+			map.SetActive(false);
+			mapOpen = false;
+		}
+	}
 
     public void SetDeadUI()
     {
