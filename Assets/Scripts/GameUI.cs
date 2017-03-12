@@ -22,6 +22,10 @@ public class GameUI : MonoBehaviour
     public Image rightReady;
     public Image rightNotReady;
 
+	[Header("Shop functionality")]
+	public GameObject shop;
+	public Animator shopAnimator;
+
     float tempSpeed;
     float maxHitpoints;
 
@@ -48,10 +52,8 @@ public class GameUI : MonoBehaviour
 
     public void SetDeadUI()
     {
-        Debug.Log("Overall Hitpoints left: " + Player.hullHitpoints);
         float hpLeft;
         hpLeft = Player.hullHitpoints / maxHitpoints - 1;
-        Debug.Log("This is HP left amount: " + hpLeft);
         Color c = lowHitpoints.color;
         c.a = Mathf.Abs(hpLeft);
         lowHitpoints.color = c;
@@ -84,4 +86,17 @@ public class GameUI : MonoBehaviour
             leftNotReady.color = c;
         }
     }
+
+	public void DisableShop()
+	{
+		StartCoroutine("DisableAfterTime");
+	}
+
+	 IEnumerator DisableAfterTime()
+	{
+		shopAnimator.SetBool("Exit", true);
+		yield return new WaitForSeconds(2f);
+		shopAnimator.SetBool("Exit", false);
+		shop.SetActive(false);
+	}
 }
