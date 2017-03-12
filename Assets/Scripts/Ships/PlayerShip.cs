@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class PlayerShip : NavShip
 {
+	public static PlayerShip Instance;
+
 	[Header("Ship stats")]
 	[Range(0, 1000)]
 	public float overallHitpoints = 1000;
@@ -26,8 +28,31 @@ public class PlayerShip : NavShip
 
 	private float tAngle;
 
+	public static float Distance(Vector3 position)
+	{
+		if (!Instance) return Mathf.Infinity;
+
+		Vector3 from = new Vector3(Instance.transform.position.x, 0, Instance.transform.position.z);
+		Vector3 to = new Vector3(position.x, 0, position.z);
+		return Vector3.Distance(from, to);
+
+	}
+
+	public static float Angle(Vector3 position, float delta = 0)
+	{
+		if (!Instance) return 0;
+
+		Vector3 from = new Vector3(Instance.transform.position.x, 0, Instance.transform.position.z);
+		Vector3 to = new Vector3(position.x, 0, position.z);
+
+		return Helper.AngleInDeg(to, from, delta);
+
+	}
+
 	void Awake()
 	{
+		Instance = this;
+
 		targetAngle = 90;
 		Player.hullHitpoints = overallHitpoints;
 	}
@@ -46,10 +71,12 @@ public class PlayerShip : NavShip
 		targetAngle += Input.GetKey(KeyCode.D) ? angularThrotle : Input.GetKey(KeyCode.A) ? -angularThrotle : 0;
 		float angle = Mathf.MoveTowardsAngle(transform.eulerAngles.y, targetAngle, angularSpeed * Time.deltaTime) * Mathf.Deg2Rad;
 
+		transform.eulerAngles = new Vector3(0,angle * Mathf.Rad2Deg, 0);
+
 		if (agent && agent.enabled)
 		{
 			//Set move on nav mesh
-			agent.velocity = new Vector3(Mathf.Sin(angle), 0, Mathf.Cos(angle)) * speed;
+			//agent.velocity = new Vector3(Mathf.Sin(angle), 0, Mathf.Cos(angle)) * speed;
 		}
 
 		if (weapons && Input.GetMouseButtonDown(0))
@@ -63,14 +90,12 @@ public class PlayerShip : NavShip
 			{
 				return;
 			}
-			float a = Helper.AngleInDeg(transform.position, hit.point, -90f);
-
-			Debug.Log("pos: " + transform.position + hit.collider.name + " pos: " + hit.point + " angle:" + a);
-			weapons.Shot(a);
+			angle = Helper.AngleInDeg(transform.position, hit.point, -angle * Mathf.Rad2Deg);
+			weapons.Shot(angle);
 		}
 
 		// Set static Player hitpoints
-		Player.hullHitpoints = overallHitpoints;
+		Player.hullHitpoints = overallHitpoints * (1 - damage);
 	}
 
 	public void OnTriggerEnter(Collider other)

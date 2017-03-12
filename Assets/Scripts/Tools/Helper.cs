@@ -40,8 +40,11 @@ public static class Helper
 	public static float AngleInDeg(Vector3 vec1, Vector3 vec2, float delta = 0)
 	{
 		float angle = AngleInRad(vec1, vec2) * 180f / Mathf.PI + delta;
-		if (angle < 0) angle = 360 + angle;
-		if (angle > 360) angle = 360 - angle;
+		
+		int an = Mathf.FloorToInt(Mathf.Abs(angle) / 360f)*360;
+		if (angle < 0) angle = an + 360 + angle;
+		if (angle > 360) angle = an - angle;
+
 		return angle;
 	}
 

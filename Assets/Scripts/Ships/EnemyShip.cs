@@ -31,9 +31,16 @@ public class EnemyShip : NavShip
 			return;
 		}
 
-		if (agent.remainingDistance < 0.5f)
+		if (PlayerShip.Distance(transform.position) < 15)
 		{
-			//StartCoroutine(WaitInPort());
+			//Debug.Log("dist:" +  PlayerShip.Distance(transform.position) + " angle:" + PlayerShip.Angle(transform.position));
+			weapons.Shot(PlayerShip.Angle(transform.position,-90));
+		}
+
+
+		if (target && agent.remainingDistance < 0.5f)
+		{
+			StartCoroutine(WaitInPort());
 		}
 
 		base.Update();
