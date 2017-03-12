@@ -10,7 +10,7 @@ public class Bullet : MonoBehaviour
 
 	private Rigidbody body;
 	private bool isCollision;
-	private float bulletTime = 1.5f;
+	private float bulletTime = 3f;
 
 	private Collider[] ignoredColliders;
 	private Collider selfCollider;
