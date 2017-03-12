@@ -35,7 +35,7 @@ public class EnemyShip : NavShip
 
 		if (destinations.Count > 0)
 		{
-			//target = destinations[0];
+			target = destinations[0];
 		}
 	}
 
