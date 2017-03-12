@@ -11,10 +11,14 @@ public class WeaponManager : MonoBehaviour
 		canons = GetComponentsInChildren<Canon>().ToList();
 	}
 
-	public void Shot()
+	public void Shot(float angle)
 	{
+
+		CannonBort bort = angle < 180 ? CannonBort.Right : CannonBort.Left;
+
 		foreach (Canon canon in canons)
 		{
+			if (canon.bort != bort) continue;
 			canon.Shot();
 		}		
 	}

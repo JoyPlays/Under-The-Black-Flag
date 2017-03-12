@@ -1,10 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+public enum CannonBort
+{
+	Left, Right
+}
+
 public class Canon : MonoBehaviour
 {
 	public float reloadTime = 3f;
 	public float force = 100;
+
+	public CannonBort bort;
 
 	[Header("Random values (0-100%)")]
 
@@ -15,6 +22,8 @@ public class Canon : MonoBehaviour
 	[Tooltip("Force increase random")]
 	[Range(0, 100)]
 	public float forceIncrease = 10;
+
+	public Vector3 forward;
 
 	internal bool isReady = true;
 
@@ -29,13 +38,17 @@ public class Canon : MonoBehaviour
 	{
 		get
 		{
-			return transform.forward * (force + (1 + Random.value*(forceIncrease/100f)));
+			//Debug.Log(transform.forward);
+			forward = transform.forward;
+			return forward * force  * 10f * (1 + (Random.value * forceIncrease) / 100f);
 		}
 	}
 
 	public void Shot()
 	{
 		if (!isReady) return;
+
+		
 
 		isReady = false;
 		StartCoroutine(Shooting());

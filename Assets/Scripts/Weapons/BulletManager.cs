@@ -34,12 +34,21 @@ public class BulletManager : MonoBehaviour
 	public void ShotBullet(Canon canon)
 	{
 		Bullet bullet = null;
+		foreach (Bullet bullet1 in bullets)
+		{
+			if (!bullet1.isReady) continue;
+			bullet = bullet1;
+		}
+		if (!bullet)
+		{
+			GameObject obj = Instantiate(bulletPrefab, canon.transform.position, canon.transform.rotation);
+			obj.transform.SetParent(transform);
+			bullet = obj.GetComponent<Bullet>();
+			bullets.Add(bullet);
+		}
 
-//		GameObject obj = Instantiate(bulletPrefab, canon.transform.position, canon.transform.rotation);
-//		obj.transform.SetParent(transform);
-//		Bullet bullet = obj.GetComponent<Bullet>();
-//		bullet.Shot(canon);
-		//bullets.Add(bullet);
+		bullet.Shot(canon);
+
 	}
 
 }

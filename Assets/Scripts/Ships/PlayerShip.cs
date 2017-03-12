@@ -52,9 +52,21 @@ public class PlayerShip : NavShip
 			agent.velocity = new Vector3(Mathf.Sin(angle), 0, Mathf.Cos(angle)) * speed;
 		}
 
-		if (weapons && Input.GetKey(KeyCode.Space))
+		if (weapons && Input.GetMouseButtonDown(0))
+			//Input.GetKey(KeyCode.Space))
 		{
-			//weapons.Shot(this);
+
+			RaycastHit hit = new RaycastHit();
+			if (
+					!Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition).origin,
+													 Camera.main.ScreenPointToRay(Input.mousePosition).direction, out hit, Mathf.Infinity, LayerMask.GetMask("Water")))
+			{
+				return;
+			}
+			float a = Helper.AngleInDeg(transform.position, hit.point, -90f);
+
+			Debug.Log("pos: " + transform.position + hit.collider.name + " pos: " + hit.point + " angle:" + a);
+			weapons.Shot(a);
 		}
 
 		// Set static Player hitpoints

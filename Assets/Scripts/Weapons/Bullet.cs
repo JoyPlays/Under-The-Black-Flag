@@ -44,7 +44,7 @@ public class Bullet : MonoBehaviour
 		transform.position = canon.transform.position;
 		transform.rotation = canon.transform.rotation;
 
-		body.AddForce(canon.shotForce * 100);
+		body.AddForce(canon.shotForce);
 
 		StartCoroutine(WaitShot());
 	}
