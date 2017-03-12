@@ -1,12 +1,11 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
 public class PlayerShip : NavShip
 {
-    [Header("Ship stats")]
-    [Range(0, 1000)]
-    public float overallHitpoints = 1000; 
+	[Header("Ship stats")]
+	[Range(0, 1000)]
+	public float overallHitpoints = 1000;
 
 	[Header("Player")]
 	[Range(0, 20)]
@@ -18,27 +17,20 @@ public class PlayerShip : NavShip
 	[Range(0, 50)]
 	public float angularSpeed;
 
-	[Header("Cannons")]
-	public List<Canon> rightCannons;
-	public List<Canon> leftCannons;
-
 	[Header("Test values")]
 	[Range(0, 10)]
 	public float speed;
 	public float targetAngle = 0;
 
-
-
-	public WeaponManager weapons;
+	internal City dockPort;
 
 	private float tAngle;
 
 	void Awake()
 	{
 		targetAngle = 90;
-        Player.hullHitpoints = overallHitpoints;
-
-    }
+		Player.hullHitpoints = overallHitpoints;
+	}
 
 	protected override void Update()
 	{
@@ -48,7 +40,7 @@ public class PlayerShip : NavShip
 		speed += Input.GetKey(KeyCode.W) ? throtle : Input.GetKey(KeyCode.S) ? -throtle : 0;
 		speed = Mathf.Clamp(speed, 0, maxSpeed);
 
-        Player.shipSpeed = speed;
+		Player.shipSpeed = speed;
 
 		//Keyboard rotate
 		targetAngle += Input.GetKey(KeyCode.D) ? angularThrotle : Input.GetKey(KeyCode.A) ? -angularThrotle : 0;
@@ -65,8 +57,26 @@ public class PlayerShip : NavShip
 			//weapons.Shot(this);
 		}
 
-        // Set static Player hitpoints
-        Player.hullHitpoints = overallHitpoints;
-    }
+		// Set static Player hitpoints
+		Player.hullHitpoints = overallHitpoints;
+	}
 
+	public void OnTriggerEnter(Collider other)
+	{
+		if (other.GetComponent<City>())
+		{
+			dockPort = other.GetComponent<City>();
+			Debug.Log("Enter in city:" + dockPort.caption);
+		}
+	}
+
+	public void OnTriggerExit(Collider other)
+	{
+		if (dockPort && other.GetComponent<City>())
+		{
+			Debug.Log("Exit from city:" + dockPort.caption);
+			dockPort = null;
+		}
+
+	}
 }

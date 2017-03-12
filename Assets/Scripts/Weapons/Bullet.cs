@@ -31,20 +31,20 @@ public class Bullet : MonoBehaviour
 		}
 	}
 
-	public void Shot(Canon canon, Ship ignoreShip)
+	public void Shot(Canon canon)
 	{
 		gameObject.SetActive(true);
 
-		if (ignoreShip)
+		if (canon.ship)
 		{
-			ignoredColliders = ignoreShip.GetComponentsInChildren<Collider>();
+			ignoredColliders = canon.ship.GetComponentsInChildren<Collider>();
 			IgnoreColliders(true);
 		}
 
 		transform.position = canon.transform.position;
 		transform.rotation = canon.transform.rotation;
 
-		body.AddForce(canon.transform.forward * canon.force * 100);
+		body.AddForce(canon.shotForce * 100);
 
 		StartCoroutine(WaitShot());
 	}

@@ -25,12 +25,20 @@ public class BulletManager : MonoBehaviour
 		}
 	}
 
+	public static void Shot(Canon canon)
+	{
+		if (!Instance) return;
+		Instance.ShotBullet(canon);
+	}
+
 	public void ShotBullet(Canon canon)
 	{
-		GameObject obj = Instantiate(bulletPrefab, canon.transform.position, canon.transform.rotation);
-		obj.transform.SetParent(transform);
-		Bullet bullet = obj.GetComponent<Bullet>();
-		bullet.Shot(canon, null);
+		Bullet bullet = null;
+
+//		GameObject obj = Instantiate(bulletPrefab, canon.transform.position, canon.transform.rotation);
+//		obj.transform.SetParent(transform);
+//		Bullet bullet = obj.GetComponent<Bullet>();
+//		bullet.Shot(canon);
 		//bullets.Add(bullet);
 	}
 

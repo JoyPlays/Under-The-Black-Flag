@@ -4,7 +4,7 @@ using UnityEngine.AI;
 
 public class NavShip : Ship
 {
-
+	[Header("Navigate")]
 	public Transform target;
 
 	[Header("Wave")]

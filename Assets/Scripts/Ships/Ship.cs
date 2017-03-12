@@ -5,7 +5,7 @@ public class Ship : MonoBehaviour
 {
 	[Header("Params")]
 	public float damage;
-	public DamageManager damageManager;
+	public WeaponManager weapons;
 
 	internal bool isDed;
 
@@ -14,8 +14,8 @@ public class Ship : MonoBehaviour
 		if (isDed) return;
 
 		damage += hitpoint;
-		if (damageManager) damageManager.damage = damage;
 		if (damage >= 1) Sunk();
+
 	}
 
 	public virtual void Sunk()
