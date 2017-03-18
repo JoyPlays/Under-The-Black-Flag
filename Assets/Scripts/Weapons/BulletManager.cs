@@ -33,6 +33,11 @@ public class BulletManager : MonoBehaviour
 
 	public void ShotBullet(Canon canon)
 	{
+		if (!canon)
+		{
+			return;
+		}
+
 		Bullet bullet = null;
 		foreach (Bullet bullet1 in bullets)
 		{

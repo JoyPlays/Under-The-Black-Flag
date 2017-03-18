@@ -56,7 +56,7 @@ public class Canon : MonoBehaviour
 	IEnumerator Shooting()
 	{
 		BulletManager.Shot(this);
-		AudioSource.PlayClipAtPoint(cannonSound, transform.position);
+		//AudioSource.PlayClipAtPoint(cannonSound, transform.position);
 		yield return new WaitForSeconds(reloadTime * (1 + Random.value * (reloadTimeIncrease / 100f)));
 
 		isReady = true;
