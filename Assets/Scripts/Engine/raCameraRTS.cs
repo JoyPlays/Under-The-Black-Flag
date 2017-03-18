@@ -57,6 +57,7 @@ namespace raCamera
 		[Header("Settings")]
 		public bool useKeyboardInput = true;
 		public bool useMouseInput = true;
+		public bool useMouseZoom = true;
 		public bool adaptToTerrainHeight = true;
 		public bool increaseSpeedWhenZoomedOut = true;
 		public bool correctZoomingOutRatio = true;
@@ -252,7 +253,7 @@ namespace raCamera
 					deltaZoom = -1.0f;
 				}
 			}
-			if (useMouseInput)
+			if (useMouseZoom)
 			{
 				float scroll = Input.GetAxis("Mouse ScrollWheel");
 				deltaZoom -= scroll * mouseZoomMultiplier;

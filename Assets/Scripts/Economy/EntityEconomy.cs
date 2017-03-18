@@ -18,7 +18,7 @@ public class EntityEconomy : MonoBehaviour {
 	}
 
 	public void AddResource(string name, int value) {
-		Debug.Log("Adding resource: " + name + " value: " + value);
+		//Debug.Log("Adding resource: " + name + " value: " + value);
 		foreach(Resource res in Resources) {
 			if(res.Name.ToString() == name) {
 				res.Ammount += value;
@@ -33,7 +33,7 @@ public class EntityEconomy : MonoBehaviour {
 	}
 
 	public void RemoveResource(string name, int value) {
-		Debug.Log("Using resource: " + name + " value: " + value);
+		//Debug.Log("Using resource: " + name + " value: " + value);
 			foreach(Resource res in Resources) {
 				if(res.Name == name) {
 					res.Ammount -= value;
@@ -108,7 +108,7 @@ public class EntityEconomy : MonoBehaviour {
 
 
 		foreach(Resource res in Resources) {
-			int ammount = res.Ammount;
+			//int ammount = res.Ammount;
 			int diffenrece = cycle_difference[res.Name];
 			int base_price = response[res.Name];
 
