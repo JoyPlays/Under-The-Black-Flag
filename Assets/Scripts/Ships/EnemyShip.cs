@@ -78,6 +78,7 @@ public class EnemyShip : NavShip
 			{
 				target = null;
 				agent.velocity = Vector3.zero;
+				agent.ResetPath();
 			}
 
 
