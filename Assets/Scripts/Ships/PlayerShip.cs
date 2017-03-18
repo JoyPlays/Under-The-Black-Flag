@@ -55,7 +55,7 @@ public class PlayerShip : NavShip
 	{
 		Instance = this;
 
-		targetAngle = 90;
+		//targetAngle = 90;
 		Player.hullHitpoints = overallHitpoints;
 	}
 
@@ -98,6 +98,7 @@ public class PlayerShip : NavShip
 		Player.hullHitpoints = overallHitpoints * (1 - damage);
 	}
 
+#region PORT
 	public void OnTriggerEnter(Collider other)
 	{
 		if (!other.GetComponent<City>()) return;
@@ -105,6 +106,7 @@ public class PlayerShip : NavShip
 		dockPort = other.GetComponent<City>();
 		Player.enteredCity = dockPort.caption;
 
+		CityManager.CurrentCity = dockPort;
 
 		Debug.Log("Enter in city:" + dockPort.caption);
 	}
@@ -123,8 +125,10 @@ public class PlayerShip : NavShip
 		{
 			Debug.Log("Exit from city:" + dockPort.caption);
 			dockPort = null;
+			CityManager.CurrentCity = null;
 			Player.enteredCity = "";
 		}
 
 	}
+#endregion
 }

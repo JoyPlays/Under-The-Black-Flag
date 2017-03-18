@@ -25,4 +25,7 @@ public static class Player {
     public static int crewCount;
     public static float crewHitpoints;
 
+
+	public static int money = 1000;
+
 }

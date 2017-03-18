@@ -5,6 +5,7 @@ public class ShopCannonCannon : MonoBehaviour
 {
 
 	public GameObject selectedObject;
+	public int paramIndex = 0;
 
 	private bool _selected;
 

@@ -6,12 +6,18 @@ public enum CannonBort
 	Left, Right
 }
 
+public enum CannonDeck
+{
+	Upper, Middle, Down
+}
+
 public class Canon : MonoBehaviour
 {
 	public float reloadTime = 3f;
 	public float force = 100;
 
 	public CannonBort bort;
+	public CannonDeck deck;
 
 	public AudioClip cannonSound;
 
@@ -27,9 +33,11 @@ public class Canon : MonoBehaviour
 
 	public Vector3 forward;
 
+	public bool isActive = true;
 	internal bool isReady = true;
 
 	internal Ship ship;
+	internal int index;
 
 	void Start()
 	{
@@ -48,6 +56,8 @@ public class Canon : MonoBehaviour
 
 	public void Shot()
 	{
+		if  (!isActive) return;
+
 		if (!isReady) return;
 		isReady = false;
 		StartCoroutine(Shooting());
@@ -67,7 +77,7 @@ public class Canon : MonoBehaviour
 		Gizmos.matrix = Matrix4x4.TRS(transform.position, transform.rotation, Vector3.one);
 
 		Color oldColor = Gizmos.color;
-		Gizmos.color = Color.blue;
+		Gizmos.color = isActive ? Color.blue : Color.red;
 
 		Gizmos.DrawWireCube(Vector3.zero + Vector3.forward * 0.5f, new Vector3(0.1f, 0.1f, 1f));
 
@@ -81,7 +91,7 @@ public class Canon : MonoBehaviour
 		Gizmos.matrix = Matrix4x4.TRS(transform.position, transform.rotation, Vector3.one);
 
 		Color oldColor = Gizmos.color;
-		Gizmos.color = Color.green;
+		Gizmos.color = isActive ? Color.green : Color.magenta;
 
 		Gizmos.DrawCube(Vector3.zero + Vector3.forward * 0.5f, new Vector3(0.1f, 0.1f, 1f));
 

@@ -7,6 +7,7 @@ public class ShopSlot : MonoBehaviour
 	public Color selectColor;
 	public GameObject cannonSlot;
 
+	internal int index;
 
 	private bool _freeSlot = true;
 	internal bool freeSlot {
@@ -65,6 +66,6 @@ public class ShopSlot : MonoBehaviour
 
 	public virtual bool SlotClick()
 	{
-		return true;
+		return freeSlot;
 	}
 }

@@ -3,8 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+public enum UIMessageType
+{
+	Message, Error
+}
+
 public class GameUI : MonoBehaviour
 {
+	public static GameUI Instance;
+
+	public Text moneyText;
 
     [Header("Ship game UI variables")]
     public Text shipSpeed;
@@ -34,17 +42,38 @@ public class GameUI : MonoBehaviour
 	public GameObject quitToMenu;
 	private bool quitMenuOpened;
 
-    float tempSpeed;
+	[Header("Message")]
+	public Color messageColor;
+	public Color errorColor;
+	public Image messageImage;
+	public Text messageText;
+	private bool messageBreak;
+
+	float tempSpeed;
     float maxHitpoints;
 
-    void Start()
-    {
-        maxHitpoints = Player.hullHitpoints;
-    }
+	void Awake()
+	{
+		Instance = this;
+	}
+
+	void Start()
+	{
+			maxHitpoints = Player.hullHitpoints;
+	}
+
+	public static void ShowMessage(UIMessageType type, string message)
+	{
+		if (!Instance) return;
+
+		Instance.StartCoroutine(Instance.DispalayMessage(type, message));
+	}
 
     // Update is called once per frame
 	void Update()
 	{
+		if (moneyText) moneyText.text = "Money: " + Player.money;
+
 		// Updating UI speed text 
 		tempSpeed = Mathf.Round(Player.shipSpeed * 100.0f) / 100.0f;
 		shipSpeed.text = tempSpeed.ToString() + " m/s";
@@ -141,11 +170,50 @@ public class GameUI : MonoBehaviour
 		StartCoroutine("DisableAfterTime");
 	}
 
-	 IEnumerator DisableAfterTime()
+	IEnumerator DisableAfterTime()
 	{
 		shopAnimator.SetBool("Exit", true);
 		yield return new WaitForSeconds(2f);
 		shopAnimator.SetBool("Exit", false);
 		shop.SetActive(false);
+	}
+
+	IEnumerator DispalayMessage(UIMessageType type, string message)
+	{
+
+		if (messageImage.gameObject.activeSelf)
+		{
+			messageBreak = true;
+			while (messageBreak) yield return null;
+		}
+
+		messageImage.color = type == UIMessageType.Error ? errorColor : messageColor;
+		messageText.text = message;
+
+		Color m = messageText.color;
+		m.a = 1;
+		messageText.color = m;
+
+		messageImage.gameObject.SetActive(true);
+
+		float timeOut = 5;
+		while (timeOut > 0)
+		{
+			if (messageBreak)
+			{
+				messageBreak = false;
+				yield break;
+			}
+
+			m.a = timeOut/5f;
+			messageText.color = m;
+
+			timeOut -= Time.deltaTime;
+			yield return null;
+		}
+
+		messageImage.gameObject.SetActive(false);
+
+		
 	}
 }

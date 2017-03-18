@@ -4,6 +4,8 @@ using UnityEngine.Events;
 
 public class ShopCannonSlot : ShopSlot
 {
+	public CannonBort bort;
+	public CannonDeck deck;
 
 
 	protected override void OnMouseEnter()
@@ -15,12 +17,8 @@ public class ShopCannonSlot : ShopSlot
 	public override bool SlotClick()
 	{
 		if (!base.SlotClick()) return false;
-		if (!CannonShopManager.SelectedCannon) return false;
 
-		CannonShopManager.SelectedCannon.gameObject.SetActive(false);
-		CannonShopManager.SelectedCannon = null;
-
-		return true;
+		return CannonShopManager.Instance.BuyCannon(this);
 	}
 
 }

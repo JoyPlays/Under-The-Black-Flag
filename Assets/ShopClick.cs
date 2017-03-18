@@ -31,6 +31,7 @@ public class ShopClick : MonoBehaviour
 
 	void OnMouseDown()
 	{
+		
 		if (GunShop)
 		{
 			shop.SetActive(true);

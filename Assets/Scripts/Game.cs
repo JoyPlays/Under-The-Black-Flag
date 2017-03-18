@@ -7,16 +7,17 @@ public class Game : MonoBehaviour
 {
 	public static Game Instance;
 
-	internal List<City> cities;
 
 	void Awake()
 	{
 		Instance = this;
 		DontDestroyOnLoad(gameObject);
+
+		Physics.IgnoreLayerCollision(11, 4, true);
+
 	}
 
 	void Start()
 	{
-		cities = GetComponentsInChildren<City>().ToList();
 	}
 }
