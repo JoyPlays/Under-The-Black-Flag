@@ -14,6 +14,8 @@ public class PlayerShip : NavShip
 	public float maxSpeed = 10;
 	[Range(0, 1)]
 	public float throtle = 0.1f;
+	[Range(0, 1)]
+	public float throtlePort = 0.09f;
 	[Range(0, 10)]
 	public float angularThrotle = 1f;
 	[Range(0, 50)]
@@ -71,7 +73,7 @@ public class PlayerShip : NavShip
 		targetAngle += Input.GetKey(KeyCode.D) ? angularThrotle : Input.GetKey(KeyCode.A) ? -angularThrotle : 0;
 		float angle = Mathf.MoveTowardsAngle(transform.eulerAngles.y, targetAngle, angularSpeed * Time.deltaTime) * Mathf.Deg2Rad;
 
-		transform.eulerAngles = new Vector3(0,angle * Mathf.Rad2Deg, 0);
+		transform.eulerAngles = new Vector3(0, angle * Mathf.Rad2Deg, 0);
 
 		if (agent && agent.enabled)
 		{
@@ -80,11 +82,11 @@ public class PlayerShip : NavShip
 		}
 
 		if (weapons && Input.GetMouseButtonDown(0))
-			//Input.GetKey(KeyCode.Space))
+		//Input.GetKey(KeyCode.Space))
 		{
 
 			RaycastHit hit = new RaycastHit();
-			if (!Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition).origin,Camera.main.ScreenPointToRay(Input.mousePosition).direction, out hit, Mathf.Infinity, LayerMask.GetMask("Water")))
+			if (!Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition).origin, Camera.main.ScreenPointToRay(Input.mousePosition).direction, out hit, Mathf.Infinity, LayerMask.GetMask("Water")))
 			{
 				return;
 			}
@@ -98,12 +100,21 @@ public class PlayerShip : NavShip
 
 	public void OnTriggerEnter(Collider other)
 	{
-		if (other.GetComponent<City>())
-		{
-			dockPort = other.GetComponent<City>();
-			Player.enteredCity = dockPort.caption;
-			Debug.Log("Enter in city:" + dockPort.caption);
-		}
+		if (!other.GetComponent<City>()) return;
+
+		dockPort = other.GetComponent<City>();
+		Player.enteredCity = dockPort.caption;
+
+
+		Debug.Log("Enter in city:" + dockPort.caption);
+	}
+
+	public void OnTriggerStay(Collider other)
+	{
+		if (!other.GetComponent<City>()) return;
+
+		if (speed > 0) speed -= throtlePort;
+
 	}
 
 	public void OnTriggerExit(Collider other)

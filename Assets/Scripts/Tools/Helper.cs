@@ -139,6 +139,11 @@ public static class Helper
 		}
 	}
 
+	public static Vector3 zerroY(this Vector3 vector)
+	{
+		return new Vector3(vector.x,0,vector.z);
+	}
+
 }
 /*
  * LAYER masks
