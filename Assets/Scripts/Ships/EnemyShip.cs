@@ -13,18 +13,12 @@ public class EnemyShip : NavShip
 	[Header("Shoting")]
 	public float shotDistance = 20;
 	public float shotAngle = 25;
-
-
-	public float playerAngle;
-	public float deltaAngle;
-
-	public float a1;
-	public float a2;
-	public float a3;
-
-	public float angle;
 	[Range(0, 50)]
 	public float angularSpeed;
+
+	[Header("Debug values")]
+	public float deltaAngle;
+
 	int currentTarget;
 
 	internal bool inPort;
@@ -50,27 +44,27 @@ public class EnemyShip : NavShip
 		float playerDist = PlayerShip.Distance(transform.position);
 		if (playerDist < shotDistance)
 		{
-			angle = Helper.ClampAngle(transform.eulerAngles.y);
-			playerAngle = PlayerShip.Angle(transform.position,90);
+			float angle = Helper.ClampAngle(transform.eulerAngles.y);
+			float playerAngle = PlayerShip.Angle(transform.position,90);
 			deltaAngle = Helper.ClampAngle(playerAngle - angle);
-			if (deltaAngle >= 0 && deltaAngle <= 25 || deltaAngle >= 335)
+
+
+			if (deltaAngle >= 360 - shotAngle ||  deltaAngle <= shotAngle || deltaAngle >= 180 - shotAngle && deltaAngle <= 180 + shotAngle )
 			{
-				//Debug.Log("a:" + a + " angle:" + PlayerShip.Angle(transform.position,-a));
+				//Debug.Log("shot:" + shipName);
 				weapons.Shot(PlayerShip.Angle(transform.position, -angle));
 			}
-			//else
-			{
-				a1 = Mathf.Abs(Helper.CalcShortestRot(angle, playerAngle));
-				a2 = Mathf.Abs(Helper.CalcShortestRot(angle, playerAngle - 180f));
+			float a1 = Mathf.Abs(Helper.CalcShortestRot(angle, playerAngle));
+			float a2 = Mathf.Abs(Helper.CalcShortestRot(angle, playerAngle - 180f));
 
-				a3 = a1 < a2 ? playerAngle : playerAngle - 180;
+			float a3 = a1 < a2 ? playerAngle : playerAngle - 180;
 
-				angle = Mathf.MoveTowardsAngle(angle, a3, angularSpeed*Time.deltaTime);
+			angle = Mathf.MoveTowardsAngle(angle, a3, angularSpeed*Time.deltaTime);
 
 
-				transform.eulerAngles = new Vector3(0, angle, 0);
-			}
-			if (playerDist > shotDistance*0.5f)
+			transform.eulerAngles = new Vector3(0, angle, 0);
+
+			if (playerDist > shotDistance*0.8f)
 			{
 				target = PlayerShip.Instance.transform;
 			}

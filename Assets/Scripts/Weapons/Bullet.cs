@@ -39,7 +39,7 @@ public class Bullet : MonoBehaviour
 
 		gameObject.SetActive(true);
 
-		if (canon.ship)
+		if (canon && canon.ship)
 		{
 			ignoredColliders = canon.ship.GetComponentsInChildren<Collider>();
 			IgnoreColliders(true);

@@ -3,6 +3,8 @@ using System.Collections;
 
 public class Ship : MonoBehaviour
 {
+	public string shipName;
+
 	[Header("Params")]
 	public float damage;
 	public WeaponManager weapons;
@@ -13,7 +15,7 @@ public class Ship : MonoBehaviour
 	{
 		if (isDed) return;
 
-		damage += hitpoint;
+		//damage += hitpoint;
 		if (damage >= 1) Sunk();
 
 	}
